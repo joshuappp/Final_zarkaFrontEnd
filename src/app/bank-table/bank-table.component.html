@@ -1,0 +1,22 @@
+
+  <div class="table-responsive text-nowrap mb-3">
+    <button type="button" [class]="setting.zarkaTheme.button" (click)="bankAccessWeb(table[0])">{{ table[0] }}</button>
+    <table class="table table-bordered table-hover">
+      <thead class="white-text">
+        <tr>
+          <th [class]="setting.zarkaTheme.tableTh"><b>Code</b></th>
+          <th [class]="setting.zarkaTheme.tableTh"><b>Name</b></th>
+          <th [class]="setting.zarkaTheme.tableTh"><b>Sell</b></th>
+          <th [class]="setting.zarkaTheme.tableTh"><b>Buy</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of table; index as i">
+          <th *ngIf="i !== 0" class="table_content">{{ data[2] }}</th>
+          <td *ngIf="i !== 0" class="table_content">{{ data[1] }}</td>
+          <td *ngIf="i !== 0" class="table_content">{{ data[4] }}</td>
+          <td *ngIf="i !== 0" class="table_content">{{ data[3] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

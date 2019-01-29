@@ -1,0 +1,68 @@
+<!-- <ngx-spinner bdColor="#eceff100" size="large" [color]="setting.zarkaTheme.loader" type="ball-atom"></ngx-spinner> -->
+
+<div class="d-flex justify-content-between">
+  <h2 class="h2-responsive grey-text bounceIn">Three Months History </h2>
+  <p class="small grey-text mr-4 mt-2 animated fadeIn" *ngIf="updatedDate"><i>Updated {{updatedDate}}...</i></p>
+</div>
+
+<!--End main row-->
+<hr>
+<div class="example-2">
+
+  <div class="row">
+
+    <div class="col-12 d-flex justify-content-center text-center">
+      <select (change)="selectCurrenyEvent($event)" class="form-control">
+        <option *ngFor="let currency of currencies" value={{currency}}>{{currency}}</option>
+      </select>
+    </div>
+
+    <!--Start History Chart Display-->
+    <div class="charts row col-12 px-4 pb-4">
+      <!--Start Sell-->
+      <div class="col-6">
+        <canvas id="chartSellBank" class="chartjs-render-monitor"></canvas>
+      </div>
+      <!--End Sell graph-->
+
+      <!--Start Buy-->
+      <div class="col-6">
+        <canvas id="chartBuyBank" class="chartjs-render-monitor"></canvas>
+      </div>
+      <!--En-->
+    </div>
+    <!--End History Charts Display-->
+  </div>
+
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-12 pb-5 mb-12">
+      <h2 class="h2-responsive grey-text animated fadeInUp">Bank Rates</h2>
+      <hr>
+    </div>
+
+    <!--Grid Coloumn 2-->
+    <div class="col-md-12 mb-12 px-4">
+      <!-- Start Card-->
+      <div class="card example-1 z-depth-1-half hoverable">
+        <div class="card-body">
+          <!--Start Cards Body-->
+          <div class="row">
+
+            <app-bank-table *ngFor="let tableData of bankNameSpecData" class="div col-6" [table]="tableData"></app-bank-table>
+
+          </div>
+          <!--End Card Body-->
+        </div>
+        <!--End card-->
+      </div>
+    </div>
+
+    <!-- End Grid column 2-->
+  </div>
+  <!-- Grid row -->
+  <br><br><br><br>
+</div>

@@ -1,0 +1,172 @@
+<!-- <ngx-spinner bdColor="#eceff100" size="large" [color]="setting.zarkaTheme.loader" type="ball-atom"></ngx-spinner> -->
+
+<div class="d-flex justify-content-between">
+  <h2 class="h2-responsive grey-text bounceIn">Live market rates!</h2>
+  <p class="small grey-text mr-5 mt-2 animated fadeIn" *ngIf="updatedDate"><i>Updated {{updatedDate}}...</i></p>
+</div>
+
+<hr>
+
+<div class="scroll-up-down">
+
+  <!--##### Best deal cards -->
+  <div class="row p-4">
+    <!--##### Dollar -->
+    <div class="col-4">
+      <mdb-card>
+        <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+          <div class="currency-card">
+            <div class="currency-card-head text-center">
+              <table class="d-flex justify-content-center">
+                <tbody class="text-center">
+                  <tr>
+                    <td><img src="./assets/img/currency_images/usd.png" height="30px" width="auto" alt=""> </td>
+                    <td class="pt-3">
+                      <h5 class="text-center grey-text">USD</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            <div class="currency-card-main">
+              <div class="row">
+                <div class="col">
+                  <div *ngIf="usdSell?.length" class="animated fadeIn">
+                    <h6>{{usdSell[0]}}</h6>
+                    <h6> Selling at: {{usdSell[4] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!usdSell?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                  <hr>
+                  <div *ngIf="usdBuy?.length" class="animated fadeIn">
+                    <h6>{{usdBuy[0]}}</h6>
+                    <h6> Buying at: {{usdBuy[3] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!usdBuy?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+    <!--##### Euro -->
+    <div class="col-4">
+      <mdb-card>
+        <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+          <div class="currency-card">
+            <div class="currency-card-head text-center">
+              <table class="d-flex justify-content-center">
+                <tbody class="text-center">
+                  <tr>
+                    <td><img src="./assets/img/currency_images/euro.png" height="30px" width="auto" alt=""> </td>
+                    <td class="pt-3">
+                      <h5 class="text-center grey-text">EUR</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            <div class="currency-card-main">
+              <div class="row">
+                <div class="col">
+                  <div *ngIf="eurSell?.length" class="animated fadeIn">
+                    <h6>{{eurSell[0]}}</h6>
+                    <h6> Selling at: {{eurSell[4] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!eurSell?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                  <hr>
+                  <div *ngIf="eurBuy?.length" class="animated fadeIn">
+                    <h6>{{eurBuy[0]}}</h6>
+                    <h6> Buying at: {{eurBuy[3] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!eurBuy?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+    <!--##### Pound -->
+    <div class="col-4">
+      <mdb-card>
+        <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+          <div class="currency-card">
+            <div class="currency-card-head text-center">
+              <table class="d-flex justify-content-center">
+                <tbody class="text-center">
+                  <tr>
+                    <td><img src="./assets/img/currency_images/british.png" height="30px" width="auto" alt=""> </td>
+                    <td class="pt-3">
+                      <h5 class="text-center grey-text">GBP</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            <div class="currency-card-main">
+              <div class="row">
+                <div class="col">
+                  <div *ngIf="gbpSell?.length" class="animated fadeIn">
+                    <h6>{{gbpSell[0]}}</h6>
+                    <h6> Selling at: {{gbpSell[4] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!gbpSell?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                  <hr>
+                  <div *ngIf="gbpBuy?.length" class="animated fadeIn">
+                    <h6>{{gbpBuy[0]}}</h6>
+                    <h6> Buying at: {{gbpBuy[3] | currency:'R'}}</h6>
+                  </div>
+                  <div *ngIf="!gbpBuy?.length" class="animated fadeIn">
+                    <h6>&nbsp;</h6>
+                    <h6>&nbsp;</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+
+  <hr>
+
+  <!--##### Chart Deals -->
+  <div class="row pr-4">
+
+    <!--##### Best Buying chart -->
+    <div class="col-6 animated fadeInUp">
+      <canvas id="chartSellHome" class="chartjs-render-monitor pt-4 pb-4" style="widows: 10px; height: 200px; margin-top:-18px;"></canvas>
+    </div>
+
+    <!--##### Best Saling chart -->
+    <div class="col-6 animated fadeInUp">
+      <canvas id="chartBuyHome" class="chartjs-render-monitor pt-4 pb-4" style="widows: 10px; height: 200px; margin-top:-18px;"></canvas>
+    </div>
+
+  </div>
+
+  <br><br><br><br><br><br><br>
+
+</div>

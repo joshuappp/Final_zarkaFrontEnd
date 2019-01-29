@@ -1,0 +1,80 @@
+<!-- <ngx-spinner bdColor="#eceff100" size="large" [color]="setting.zarkaTheme.loader" type="ball-atom"></ngx-spinner> -->
+
+<div class="row">
+  <h2 class="h2-responsive grey-text ml-3 animated fadeInUp">General Currencies</h2>
+</div>
+<hr>
+<div class="row p-4 justify-content-md-center">
+  <!--##### Dollar -->
+  <div class="col-8">
+    <mdb-card>
+      <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+        <div class="row mdb-color lighten-5 h4 text-muted mt-0 mb-2 px-3 py-2">
+          Calculate
+        </div>
+        <form>
+          <div class="form-row">
+            <div class="col">
+              <!-- First name -->
+              <div class="form-group">
+                <label for="amount" class="text-muted">Amount:</label>
+                <input type="number" min="1" name="amount" class="form-control animated fadeIn" id="amount"
+                  aria-describedby="amount" placeholder="Amount value" [(ngModel)]="amount" (input)="amountEvent()">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="from" class="text-muted">Currency:</label>
+                <select class="form-control animated fadeIn" (change)="fromEvent($event)">
+                  <option value="" disabled>Select Currency</option>
+                  <option [value]="zar.rate">{{ zar.name }}</option>
+                  <option *ngFor="let fromCurr of currencyStorage;" [value]="fromCurr.rate">
+                    {{ fromCurr.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col text-center">
+              <div class="h5 grey-text animated fadeIn" style="margin-top: 40px !important;">{{ display }}</div>
+            </div>
+          </div>
+        </form>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>
+
+
+<div class="row p-4">
+  <!-- =============Grid Coloumn======================= 2-->
+  <div class="col-md-12 mb-12 blue-grey lighten-5">
+    <!-- ============Start Card========================== -->
+    <div class="card" style="height: 40vh;">
+      <div class="card-body blue-grey lighten-5 z-depth-1-half hoverable table-responsiv">
+        <table hover="true" small="true" style="height: 50vh;" class="table table-fixed table-bordered z-depth-1 text-center animated fadeIn">
+          <thead class="white-text">
+            <tr>
+              <th [class]="setting.zarkaTheme.tableTh">Name</th>
+              <th [class]="setting.zarkaTheme.tableTh">Code</th>
+              <th [class]="setting.zarkaTheme.tableTh">Rate</th>
+              <th [class]="setting.zarkaTheme.tableTh">InverseRate</th>
+            </tr>
+          </thead>
+        </table>
+        <table mdbTable mdbTableScroll scrollY="true" hover="true" small="true" maxHeight="290" class="table table-fixed z-depth-5">
+          <tbody class="text-center example-1">
+            <tr class="animated fadeInDown" *ngFor="let currency of currencyStorage; let i = index"
+              (click)="tableEvent(currency)">
+              <td><span class="addMouseHover">{{ currency.name }}</span></td>
+              <td><span class="addMouseHover">{{ currency.code }}</span></td>
+              <td><span class="addMouseHover">{{ currency.rate }}</span></td>
+              <td><span class="addMouseHover">R {{ currency.inverseRate }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- =================chart Ends====================== -->
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>

@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  background: #eceff1;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 70px auto;
+  height: 100%;
+
+  #content {
+    padding: 30px 5px 0px 30px;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        background: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 8px;
+
+        a {
+          font-size: 1.5em;
+          text-decoration: none;
+          font-weight: bold;
+          color: #00A8FF;
+        }
+
+        ul {
+          margin-top: 20px;
+
+          li {
+            padding: 0;
+
+            a {
+              font-size: 1em;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.bg-image {
+  background: url("./assets/img/Zar_Image/zarka.png")no-repeat;
+  background-size: 480px 480px;
+  ;
+  background-position: top left;
+}
+
+/***** Remove focus */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #78909c;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/********************/

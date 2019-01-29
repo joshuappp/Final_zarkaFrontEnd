@@ -1,0 +1,29 @@
+<ng-template [ngIf]="authService.isAuthenticated()">
+  <mdb-navbar id="navigationBar" [SideClass]="setting.zarkaTheme.navbar">
+    
+    <mdb-navbar-brand class="ml-0 pl-0" style="align-content: left !important;">
+      <a class="navbar-brand mr-auto" routerLink="home">
+        <img src="./assets/img/Zar_Image/zarka.png" height="70" class="text-left" alt="">
+      </a>
+    </mdb-navbar-brand>
+
+    <mdb-navbar-brand class="mt-4 ml-auto">
+      <h6 class="text-white">
+        <em>
+          <ul style="list-style:none !important;">
+            <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                mdbWavesEffect>
+                {{ authService.zarkaUser.email }}<span class="caret ml-2"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown dropdown-blue-grey" role="menu">
+                <a *ngIf="authService.zarkaUser.email == 'guest-user@zarka'" class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Sign in</a>
+                <a *ngIf="authService.zarkaUser.email !== 'guest-user@zarka'" class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>         
+              </div>
+            </li>
+          </ul>
+        </em>
+      </h6>
+    </mdb-navbar-brand>
+
+  </mdb-navbar>
+</ng-template>

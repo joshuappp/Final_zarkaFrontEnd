@@ -1,0 +1,36 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#607d8b" type="ball-atom"></ngx-spinner> -->
+
+<div class="container bg-image">
+  <div class="row mt-5">
+    <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12 mx-auto mt-5">
+      <!-- Default form register pass #f as Form -->
+      <form class="border border-light p-5 mt-5" (ngSubmit)="onSignin(f)" #f="ngForm">
+        <p class="h4 mb-4 text-center">Sign in</p>
+        <!-- E-mail -->
+        <input type="email" id="email" name="email" class="form-control mb-4" placeholder="E-mail" ngModel>
+        <!-- Password -->
+        
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Password" ngModel id="password" name="password" class="form-control" [type]="hide ? 'password' : 'text'">
+            <mat-icon class="pl-2" (click)="hide = !hide"><small>{{hide ? 'Show Password' : 'Hide Password'}}</small></mat-icon>
+          </mat-form-field>
+       </div>
+        <!-- Sign up button -->
+        <button mdbBtn color="blue-grey" block="true" outline="true" class="my-4 animated fadeInUp" type="submit"
+          mdbWavesEffect>Sign in</button>
+        <div class="d-flex justify-content-between">
+          <a routerLink="bank" type="button" class="blue-grey-text mx-2" [routerLink]="['../signup']">
+            <i class="fa fa-plus" aria-hidden="true"></i> Sign up
+          </a>
+          <a type="button" class="blue-grey-text mx-2 ml-auto" (click)="authService.skipAuth()">
+            Skip <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </form>
+      <!-- Default form register -->
+    </div>
+  </div>
+</div>
+
+

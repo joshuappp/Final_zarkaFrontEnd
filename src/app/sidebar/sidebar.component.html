@@ -1,0 +1,286 @@
+<ng-template [ngIf]="authService.isAuthenticated()">
+  <nav [class]="setting.zarkaTheme.sidebar">
+    <ul>
+      <li>
+        <a
+          routerLink="home"
+          routerLinkActive="activated animated bounceIn"
+          mdbTooltip="Home"
+          placement="right"
+        >
+          <i class="fa fa-home fa-2x"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="bank"
+          routerLinkActive="activated animated bounceIn"
+          mdbTooltip="Banks"
+          placement="right"
+        >
+          <i class="fa fa-building-o fa-2x"></i>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="general"
+          routerLinkActive="activated animated bounceIn"
+          mdbTooltip="Other"
+          placement="right"
+        >
+          <i class="fa fa-globe fa-2x"></i>
+        </a>
+      </li>
+      <li *ngIf="authService.zarkaUser.email !== 'guest-user@zarka'">
+        <a (click)="basicModal.show()" mdbTooltip="Setting" placement="right">
+          <i class="fa fa-cog fa-2x"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-template>
+
+<div
+  mdbModal
+  #basicModal="mdbModal"
+  class="modal fade right"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myBasicModalLabel"
+  [config]="{ backdrop: false, ignoreBackdropClick: false }"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-sm modal-full-height modal-right"
+    role="document"
+  >
+    <div class="modal-content blue-grey lighten-5 scroll-up-down">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close pull-right"
+          aria-label="Close"
+          (click)="basicModal.hide()"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+        <h6 class="modal-title w-100" id="myModalLabel">Setting</h6>
+      </div>
+      <div class="modal-body">
+        <!-- Theme card -->
+        <mdb-card class="mb-3">
+          <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+            <div class="d-flex justify-content-between">
+              <div class="mt-2">THEME</div>
+              <div class="">
+                <select class="form-control" (change)="themeEvent($event)">
+                  <option value="zarka"> Zarka </option>
+                  <option value="indigo"> Indigo </option>
+                  <option value="dracula"> Dracula </option>
+                  <option value="success"> Success </option>
+                </select>
+              </div>
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+
+
+        <!-- NOTIFICATION CARD -->
+        <mdb-card >
+
+
+
+          <mdb-card-body class="blue-grey lighten-5 z-depth-1-half hoverable">
+            <!--Title-->
+            <mdb-card-title>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <span class="">NOTIFY ME</span>
+                </div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" (change)="selectedNotifyChangeHandler($event)" [(ngModel)]="notify"
+                      [checked]="notify">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </mdb-card-title>
+
+            <div *ngIf="notify">
+
+              <hr class="zarka_line">
+
+              <div class="d-flex justify-content-between animated fadeInDown">
+                <div class="col-6">
+                  <span class="text-muted">Via</span>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" (change)="selectedNotifyMeViaChangeHandler($event)" [(ngModel)]="via">
+                    <option value="Email"> Email </option>
+                    <option value="App"> Desktop </option>
+                    <option value="Both"> Both </option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div  *ngIf="via=='Email' || via=='Both'" class="d-flex justify-content-between animated fadeInDown mt-3">
+                <div class="col-6">
+                  <span class="text-muted"> Day:</span>
+                </div>
+
+                <div class="col-6">
+                  <select class="form-control" (change)="selectedOnWhichDayHandler($event)" [(ngModel)]="reportDay">
+                    <option value="Monday"> Monday </option>
+                    <option value="Tuesday"> Tuesday </option>
+                    <option value="Wednesday"> Wednesday </option>
+                    <option value="Thursday"> Thursday </option>
+                    <option value="Friday"> Friday </option>
+                    <option value="Sarturday"> Sarturday </option>
+                    <option value="Sunday"> Sunday </option>
+                  </select>
+                </div>
+              </div>
+
+              <!--Open d-flex -->
+              <div *ngIf="via=='Email' || via=='Both'"  class="d-flex justify-content-between animated fadeInDown mt-3">
+                <div class="col-4">
+                  <span class="text-muted">Time:</span>
+                </div>
+                <div class="col-8">
+                  <input class="form-control" (change)="selectedAtWhatTimeHandler($event)" type="time" id="appt" name="appt" min="9:00" max="18:00"
+                    required [(ngModel)]="reportTime">
+                </div>
+              </div>
+              <!--Close d-flex -->
+
+              <hr class="zarka_line">
+              <div *ngIf="via=='Email' || via=='Both'" class=" mdb-color lighten-5 pl-3">
+                WHEN
+              </div>
+              <!--Open d-flex --> 
+              <div  class="d-flex justify-content-between animated fadeInDown mt-3">
+                <div class="col-6">
+                  <span class="text-muted">Bank</span>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" (change)="NotifyMeOnWhichBankOrAllChangeHandler($event)" [(ngModel)]="bank">
+                    <option value="All"> All Banks </option>
+                    <option value="FNB"> Fnb </option>
+                    <option value="ABSA"> Absa </option>
+                    <option value="STANDARD"> STD Bank </option>
+                    <option value="NEDBANK"> Nedbank </option>
+                    <option value="BIDVEST"> BidVest </option>
+                  </select>
+                </div>
+              </div>
+              <!--close d-flex -->
+
+              <!--Open d-flex -->
+              <div  class="d-flex justify-content-between animated fadeInDown mt-3">
+                <div class="col-6">
+                  <span class="text-muted">Buy/Sell</span>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" (change)="selectedSellBuyAllChangeHandler($event)" [(ngModel)]="sellOrBuy">
+                    <option value="Buy"> Buy </option>
+                    <option value="Sell"> Sell </option>
+                    <option value="Both"> Both </option>
+                  </select>
+                </div>
+              </div>
+              <!--Close d-flex -->
+
+              <!--Open d-flex -->
+              <div class="d-flex justify-content-between animated fadeInDown mt-3">
+                <div class="col-6">
+                  <span class="text-muted">Currency</span>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" (change)="selectedCurrencyNotifyChangeHandler($event)" [(ngModel)]="currency">
+                    <option value="CAD"> CAD </option>
+                    <option value="CHF"> CHF </option>
+                    <option value="EUR"> EUR </option>
+                    <option value="GBP"> GBP </option>
+                    <option value="JPY"> JPY </option>           
+                    <option value="USD"> USD </option>
+                    <option value="All"> ALL </option>
+                  </select>
+                </div>
+              </div>
+              <!--Close d-flex -->
+
+              <div *ngIf="via=='App' || via=='Both'" class="mdb-color lighten-5 mt-3 pl-3">
+                <p>{{sellOrBuy | uppercase}}</p>
+              </div>
+
+              <div *ngIf="via=='App' || via=='Both'" class="d-flex justify-content-between animated fadeInDown mt-3">
+
+                <form class="" class="border border-light p-3 mt-3" (ngSubmit)="selectedCurrencyMinChangeHandler(f)" #f="ngForm">
+
+                  <div class="" *ngIf="sellOrBuy=='Buy' && (via=='App' || via=='Both')">
+
+                    <div class="form-group">
+                      <label for="buy">Buy AT Least:</label>
+                      <input type="number" validator="number,maxlength=4" min="0" step="0.01" id="buy" name="buy" class="form-control mb-4"
+                        placeholder="Buy" [(ngModel)]="buyAmountNotify">
+                    </div>
+
+                  </div>
+
+                  <div class="" *ngIf="sellOrBuy=='Sell' && (via=='App' || via=='Both')">
+
+                      <div class="form-group">
+                        <label for="sell">Sell AT Most:</label>
+                        <input type="number" validator="number,maxlength=4" min="0" step="0.01" id="sell" name="sell"
+                          class="form-control mb-4" placeholder="Sell" [(ngModel)]="sellAmountNotify">
+                      </div>
+  
+                    </div>
+
+                  <div class="" *ngIf="sellOrBuy=='Both'">
+
+                    <div class="form-group">
+                      <label for="sell">Sell AT Most:</label>
+                      <input type="number" validator="number,maxlength=4" min="0" step="0.01" id="sell" name="sell"
+                        class="form-control mb-4" placeholder="Sell" [(ngModel)]="sellAmountNotify">
+                    </div>
+                    <div class="form-group">
+                      <label for="buy">Buy AT Least:</label>
+                      <input type="number" validator="number,maxlength=4" min="0" step="0.01" id="buy" name="buy" class="form-control mb-4"
+                        placeholder="Buy" [(ngModel)]="buyAmountNotify">
+                    </div>
+                  </div>
+
+                  <button (click)="basicModal.hide()" mdbBtn color="blue-grey" block="true" outline="true" class="my-4 form-group animated fadeInUp" type="submit"
+                    mdbWavesEffect >Save
+                  </button>
+
+                </form>
+
+              </div>
+
+              <div *ngIf="via=='Email' || (via!='Both' && via==App)">
+
+                  <form class="" class="border border-light p-1 mt-3" (ngSubmit)="selectedCurrencyMinChangeHandler(f)" #f="ngForm">
+                      <button (click)="basicModal.hide()" mdbBtn color="blue-grey" block="true" outline="true" class="my-4 animated fadeInUp" type="submit"
+                         mdbWavesEffect >Save</button>
+                  </form>
+                   
+              </div>
+
+
+            </div>
+
+          </mdb-card-body>
+
+
+
+        </mdb-card>
+        <!--End notification card-->
+      </div>
+      <!--END MODAL BODY -->
+    </div>
+  </div>
+</div>
